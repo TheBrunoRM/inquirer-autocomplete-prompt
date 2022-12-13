@@ -87,12 +87,18 @@ class AutocompletePrompt extends Base {
     let content = this.getQuestion();
     let bottomContent = '';
 
-    if (this.firstRender) {
-      const suggestText = this.opt.suggestOnly ? ', tab to autocomplete' : '';
-      content += pc.dim(
-        '(Use arrow keys or type to search' + suggestText + ')'
-      );
-    }
+		if (this.firstRender) {
+			const suggestText = this.opt.suggestOnly
+				? ", " + (this.opt.tabMessage || "tab to autocomplete")
+				: "";
+			content += pc.dim(
+				"(" +
+					(this.opt.suggestMessage ||
+						"Use arrow keys or type to search") +
+					suggestText +
+					")"
+			);
+		}
 
     // Render choices or answer depending on the state
     if (this.status === 'answered') {
